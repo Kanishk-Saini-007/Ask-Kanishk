@@ -25,24 +25,24 @@ const PROXY_URL = "https://ask-kanishk-proxy.vercel.app/api/chat"; // "" = offli
 /* ---------- the knowledge base (public stuff only) ---------- */
 
 const LINKS = {
-  github: "https://github.com/KanishkSaini-007",
+  github: "https://github.com/Kanishk-Saini-007",
   linkedin: "https://www.linkedin.com/in/itskanishksaini",
-  portfolio: "https://kanishksaini-007.github.io/portfolio/",
+  portfolio: "https://kanishk-saini-007.github.io/portfolio/",
   email: "its.kanishk.saini@gmail.com",
 };
 
 const PROJECTS = [
-  { name: "AttendX", url: "https://kanishksaini-007.github.io/AttendX/", what: "attendance calculator — tells you how many classes you can bunk (or must attend) to stay above your target percentage" },
-  { name: "QuickCV", url: "https://kanishksaini-007.github.io/QuickCV/", what: "resume builder that exports a clean PDF, no sign-up" },
-  { name: "FocusFlow", url: "https://kanishksaini-007.github.io/FocusFlow/", what: "pomodoro timer with stats and streaks" },
-  { name: "SplitSmart", url: "https://kanishksaini-007.github.io/SplitSmart/", what: "splits group expenses in rupees so nobody argues over who owes what" },
-  { name: "GradeGoal", url: "https://kanishksaini-007.github.io/GradeGoal/", what: "target-marks calculator — what you need in the next exam to hit your grade" },
-  { name: "TypeSpeed", url: "https://kanishksaini-007.github.io/TypeSpeed/", what: "typing test with WPM and accuracy graphs" },
-  { name: "HabitGrid", url: "https://kanishksaini-007.github.io/HabitGrid/", what: "habit tracker with a GitHub-style year grid" },
-  { name: "DueSoon", url: "https://kanishksaini-007.github.io/DueSoon/", what: "deadline tracker with live countdowns and a 'next up' card" },
-  { name: "Corporate Intelligence Lab", url: "https://kanishksaini-007.github.io/Corporate-Intelligence-Lab/", what: "financial-analysis dashboard — 11 real companies, 5 years of SEC data, 21 ratios, risk scores, a what-if lab" },
-  { name: "Company X-Ray", url: "https://kanishksaini-007.github.io/company-xray/", what: "pick a big listed company, get its live share price, segments ranked weakest to strongest, and an auto-generated acquisition pitch" },
-  { name: "Portfolio", url: "https://kanishksaini-007.github.io/portfolio/", what: "his personal site — the 3D-ish dark + lime one everything links from" },
+  { name: "AttendX", url: "https://kanishk-saini-007.github.io/AttendX/", what: "attendance calculator — tells you how many classes you can bunk (or must attend) to stay above your target percentage" },
+  { name: "QuickCV", url: "https://kanishk-saini-007.github.io/QuickCV/", what: "resume builder that exports a clean PDF, no sign-up" },
+  { name: "FocusFlow", url: "https://kanishk-saini-007.github.io/FocusFlow/", what: "pomodoro timer with stats and streaks" },
+  { name: "SplitSmart", url: "https://kanishk-saini-007.github.io/SplitSmart/", what: "splits group expenses in rupees so nobody argues over who owes what" },
+  { name: "GradeGoal", url: "https://kanishk-saini-007.github.io/GradeGoal/", what: "target-marks calculator — what you need in the next exam to hit your grade" },
+  { name: "TypeSpeed", url: "https://kanishk-saini-007.github.io/TypeSpeed/", what: "typing test with WPM and accuracy graphs" },
+  { name: "HabitGrid", url: "https://kanishk-saini-007.github.io/HabitGrid/", what: "habit tracker with a GitHub-style year grid" },
+  { name: "DueSoon", url: "https://kanishk-saini-007.github.io/DueSoon/", what: "deadline tracker with live countdowns and a 'next up' card" },
+  { name: "Corporate Intelligence Lab", url: "https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/", what: "financial-analysis dashboard — 11 real companies, 5 years of SEC data, 21 ratios, risk scores, a what-if lab" },
+  { name: "Company X-Ray", url: "https://kanishk-saini-007.github.io/company-xray/", what: "pick a big listed company, get its live share price, segments ranked weakest to strongest, and an auto-generated acquisition pitch" },
+  { name: "Portfolio", url: "https://kanishk-saini-007.github.io/portfolio/", what: "his personal site — the 3D-ish dark + lime one everything links from" },
 ];
 
 /* detailed per-project knowledge, condensed from the public repos' READMEs */
