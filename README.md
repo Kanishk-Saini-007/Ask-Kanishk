@@ -2,7 +2,7 @@
 
 A small chatbot that lives on my portfolio and answers questions about me and the stuff I build.
 
-**Live:** https://kanishksaini-007.github.io/Ask-Kanishk/
+**Live:** https://kanishk-saini-007.github.io/Ask-Kanishk/
 
 ## Why
 
@@ -12,7 +12,7 @@ Saw a friend's AI chatbot project and wanted one of my own — but built by me, 
 
 Two modes:
 
-1. **AI mode** — the site calls a tiny serverless proxy ([ask-kanishk-proxy](https://github.com/KanishkSaini-007/ask-kanishk-proxy)) which holds my Gemini API key as an environment variable and forwards the question to the Gemini API. The key never touches this repo or the browser.
+1. **AI mode** — the site calls a tiny serverless proxy ([ask-kanishk-proxy](https://github.com/Kanishk-Saini-007/ask-kanishk-proxy)) which holds my Gemini API key as an environment variable and forwards the question to the Gemini API. The key never touches this repo or the browser.
 2. **Offline mode** — if the proxy is unreachable, a simple keyword matcher answers from the same knowledge base. Nothing leaves the browser.
 
 The bot only answers questions about me and my projects. Ask it homework questions and it will politely refuse.
