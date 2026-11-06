@@ -32,31 +32,83 @@ const LINKS = {
 };
 
 const PROJECTS = [
-  { name: "Company X-Ray", url: "https://kanishk-saini-007.github.io/company-xray/", what: "company research workspace — reported revenue comparisons read from SEC filings, products ranked weakest to strongest, and a private per-company thesis journal saved in your browser" },
-  { name: "Corporate Intelligence Lab", url: "https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/", what: "financial-statement dashboard — 11 real companies, 5 years of SEC 10-K data, 21 ratios, risk scores, a what-if lab" },
-  { name: "Analysis workbenches", url: "https://kanishk-saini-007.github.io/portfolio/#analysis-tools", what: "ten finance research tools that run live in the browser — earnings quality, debt-maturity stress, capital allocation, valuation scenarios, peer normalization, guidance tracking, cohort economics, segment mix, market concentration, portfolio risk — each with a tested Python CLI twin" },
-  { name: "Stark Sky", url: "https://kanishk-saini-007.github.io/stark-sky/", what: "an Ironman-inspired flight game in an interactive 3D browser city — his creative Three.js playground" },
-  { name: "Android Boot Log Analyzer", url: "https://kanishk-saini-007.github.io/android-boot-log-analyzer/", what: "assignment work — parses Android boot logs, classifies issues and compares boot stages, with synthetic examples and tests" },
-  { name: "Portfolio", url: "https://kanishk-saini-007.github.io/portfolio/", what: "his personal site — the dark + lime one everything links from" },
+  { name: "AttendX", url: "https://kanishk-saini-007.github.io/AttendX/", what: "attendance calculator — tells you how many classes you can bunk (or must attend) to stay above your target percentage" },
+  { name: "QuickCV", url: "https://kanishk-saini-007.github.io/QuickCV/", what: "resume builder that exports a clean PDF, no sign-up" },
+  { name: "FocusFlow", url: "https://kanishk-saini-007.github.io/FocusFlow/", what: "pomodoro timer with stats and streaks" },
+  { name: "SplitSmart", url: "https://kanishk-saini-007.github.io/SplitSmart/", what: "splits group expenses in rupees so nobody argues over who owes what" },
+  { name: "GradeGoal", url: "https://kanishk-saini-007.github.io/GradeGoal/", what: "target-marks calculator — what you need in the next exam to hit your grade" },
+  { name: "TypeSpeed", url: "https://kanishk-saini-007.github.io/TypeSpeed/", what: "typing test with WPM and accuracy graphs" },
+  { name: "HabitGrid", url: "https://kanishk-saini-007.github.io/HabitGrid/", what: "habit tracker with a GitHub-style year grid" },
+  { name: "DueSoon", url: "https://kanishk-saini-007.github.io/DueSoon/", what: "deadline tracker with live countdowns and a 'next up' card" },
+  { name: "Corporate Intelligence Lab", url: "https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/", what: "financial-analysis dashboard — 11 real companies, 5 years of SEC data, 21 ratios, risk scores, a what-if lab" },
+  { name: "Company X-Ray", url: "https://kanishk-saini-007.github.io/company-xray/", what: "pick a big listed company, get its live share price, segments ranked weakest to strongest, and an auto-generated acquisition pitch" },
+  { name: "Portfolio", url: "https://kanishk-saini-007.github.io/portfolio/", what: "his personal site — the 3D-ish dark + lime one everything links from" },  { name: "Stark Sky", url: "https://kanishk-saini-007.github.io/stark-sky/", what: "Ironman-inspired 3D flying game and project city" },
+  { name: "CGPA Planner", url: "https://kanishk-saini-007.github.io/CGPAPlanner/", what: "semester SGPA and CGPA planning with target mode" },
+  { name: "NextClass", url: "https://kanishk-saini-007.github.io/NextClass/", what: "weekly timetable with now and next class countdown" },
+  { name: "SpendLeft", url: "https://kanishk-saini-007.github.io/SpendLeft/", what: "monthly allowance and daily spending tracker" },
+  { name: "FlashFormula", url: "https://kanishk-saini-007.github.io/FlashFormula/", what: "formula flashcards with shuffle, progress and custom cards" },
+  { name: "Android Boot Log Analyzer", url: "https://kanishk-saini-007.github.io/android-boot-log-analyzer/", what: "analyze and compare Android boot logs in the browser" },
 ];
-
-/* the ten live analysis workbenches - exact URLs, the only ones the bot may quote for tools */
-const TOOL_BASE = "https://kanishk-saini-007.github.io/portfolio/tools/";
-const TOOLS = [
-  { name: "Earnings Quality Bridge", slug: "earnings-quality-bridge" },
-  { name: "Debt Maturity Stress", slug: "debt-maturity-stress" },
-  { name: "Capital Allocation Review", slug: "capital-allocation-review" },
-  { name: "Valuation Scenario Lab", slug: "valuation-scenario-lab" },
-  { name: "Peer Period Normalizer", slug: "peer-period-normalizer" },
-  { name: "Guidance Evidence Ledger", slug: "guidance-evidence-ledger" },
-  { name: "Startup Cohort Economics", slug: "startup-cohort-economics" },
-  { name: "Segment Mix Attribution", slug: "segment-mix-attribution" },
-  { name: "Market Concentration Lab", slug: "market-concentration-lab" },
-  { name: "Historical Portfolio Risk", slug: "historical-portfolio-risk" },
-].map(t => ({ ...t, url: TOOL_BASE + t.slug + "/" }));
 
 /* detailed per-project knowledge, condensed from the public repos' READMEs */
 const PROJECT_DEEP = `
+AttendX (attendance planner):
+- Set any required attendance from 1% to 100% (starts at 75%), track subjects one by one with attended/held counts.
+- Shows the exact number of consecutive classes you can still miss, or the minimum classes to attend to recover. The math uses integer cross-multiplication so a display rounded to "80.0%" can never hide that you're actually below 80%.
+- Weekly what-if simulator: enter classes per week and planned skips, compare your plan vs attending everything over 1-16 weeks.
+- One-click check-in with undo, status labels (Safe / Tight buffer / Catch up / Not started), JSON export/import backups.
+- Tech: plain HTML/CSS/JS, localStorage, zero dependencies, math verified by Node tests over all 515,000 combinations of targets and class counts.
+
+DueSoon (deadline tracker):
+- Live countdown "Next up" card for the most urgent deadline; groups everything into Overdue / Today / This week / Later / Done.
+- Subject filters, priority flags, JSON backup, press "/" to jump to the title box.
+- Why he built it: he kept forgetting which assignment was due first and wanted one page that answers exactly that.
+- Tech: vanilla JS, localStorage, date logic covered by Node tests.
+
+FocusFlow (pomodoro timer):
+- Focus, short-break and long-break modes with editable lengths; a long break after every four focus sessions.
+- Session journal, today's minutes, Monday-Sunday weekly chart, daily streaks that don't break just because today isn't done yet.
+- The timer compares a target timestamp against the real clock instead of ticking down, so an inactive tab doesn't drift.
+- Tech: plain HTML/CSS/JS, localStorage, eight dependency-free logic tests.
+
+SplitSmart (expense splitter):
+- Circles of up to 10 people, split equally or with custom relative weights, INR only.
+- Computes the exact smallest number of transfers to settle the group — a recursive search with memoization, not a greedy approximation. Amounts are handled in integer paise with largest-remainder rounding so every expense sums exactly.
+- Shareable snapshot links (data lives in the URL fragment), JSON backups up to 1 MB.
+- Tech: vanilla JS, localStorage, 11 math tests plus 500 randomized ledgers.
+
+GradeGoal (grade planner):
+- Up to 20 subjects with 20 weighted components each; enter your target percentage and scores so far.
+- Instantly shows the weighted average needed across all remaining components, the highest overall score still possible, and handles impossible or already-secured targets honestly.
+- The headline number rounds UP so rounding never tells you that you need less than you do.
+- Tech: plain HTML/CSS/JS, localStorage, 13 math tests.
+
+TypeSpeed (typing test):
+- 30s and 60s modes, clock starts on your first character, live WPM (standard 5-characters = a word) and accuracy with character-by-character highlighting.
+- Personal best per mode, last 12 runs in a switchable speed/accuracy SVG graph, history of up to 50 results.
+- Timer uses monotonic elapsed time so switching tabs doesn't pause the test; paste and drag-drop are disabled.
+- Tech: vanilla JS, localStorage, 13 core tests.
+
+HabitGrid (habit tracker):
+- Up to 30 daily habits on a GitHub-style yearly contribution grid; check in today or backfill a past date, never the future.
+- Per-habit streaks, check-in counts and completion percentages; a missed day only breaks the streak once the day actually ends.
+- Grid intensity shows the share of habits done each day; browse every year since your first habit.
+- Tech: plain HTML/CSS/JS, localStorage, JSON backups, 11 date/streak tests.
+
+QuickCV (resume builder):
+- Live-preview resume studio: contact, summary, education, experience, projects, skills, with local autosave as you type.
+- Browser-native print-to-PDF export, works on phones too, no sign-up.
+- Tech: plain HTML/CSS/JS, editorial forest-and-mint theme.
+
+Corporate Intelligence Lab (his biggest project, a finance coursework build):
+- 11 real companies (Apple, Microsoft, Alphabet, Meta, NVIDIA, Amazon, Tesla, Walmart, Coca-Cola, Boeing, Intel), five fiscal years each, pulled from SEC 10-K filings via XBRL.
+- 21 ratios with their formulas and the actual numbers used, peer medians, DuPont breakdown of ROE, peer scorecard, head-to-head radar, bubble and indexed growth charts.
+- Risk models: Altman Z''-score and an 8-test Piotroski-style checklist. What-if lab: change revenue, margins, buybacks or debt and watch the distress score move.
+- One-page printable analyst brief per company, CSV download, live quotes via Twelve Data when available.
+- He's honest about limits: the Altman model was built for old manufacturers and can misread asset-light companies like Apple.
+- Tech: one-file HTML/CSS/JS with Chart.js inlined so it works offline.
+
+
 Company X-Ray (his flagship finance project):
 - Pick a listed company and see reported revenue by product or segment, current vs prior period, with absolute change and growth — read from the company's own filings (11 US companies via SEC EDGAR 10-Ks, plus Reliance, Hindustan Unilever and Nestle typed in from official results).
 - Annual and quarterly records are labeled as such; totals are only built from comparable periods, and missing data is shown as missing, never invented as zero.
@@ -72,20 +124,6 @@ Corporate Intelligence Lab (finance coursework build):
 - He's honest about limits: the Altman model was built for old manufacturers and can misread asset-light companies like Apple.
 - Tech: one-file HTML/CSS/JS with Chart.js inlined so it works offline.
 
-The ten analysis workbenches (finance - markets - business - startups):
-- Each is a real calculator that runs fully in the browser: edit the labeled synthetic example or paste your own numbers, run, and get a reproducible report you can download as JSON.
-- Earnings Quality Bridge - reconcile reported profit with operating cash flow and name the residual honestly.
-- Debt Maturity Stress - yearly liquidity after scheduled maturities, with no assumed rescue refinancing.
-- Capital Allocation Review - where operating cash actually went, and how much needed external funds.
-- Valuation Scenario Lab - explicit DCF scenarios showing how much of the value sits in the terminal assumption.
-- Peer Period Normalizer - compare businesses across period lengths and currencies without hiding the adjustments.
-- Guidance Evidence Ledger - track management's numeric promises against dated evidence; no invented trust scores.
-- Startup Cohort Economics - retention, contribution and actual CAC payback from monthly observations.
-- Segment Mix Attribution - split revenue change into volume vs price effects with an exact, symmetric bridge.
-- Market Concentration Lab - HHI and CR4 from a defined market, plus the effect of a proposed combination.
-- Historical Portfolio Risk - volatility, drawdown, historical VaR and expected shortfall for a fixed-weight rebalanced portfolio.
-- Every browser tool runs the same model as a tested Python CLI in its own repo (72 tests across the ten, all passing). Synthetic examples are labeled, and method limits are printed on the page. They are learning tools, not investment advice.
-
 Stark Sky (creative project):
 - An Ironman-inspired flight game in an interactive 3D New York-style city, built with Three.js - his playground for graphics and game feel, kept because building it was fun.
 
@@ -94,7 +132,7 @@ Android Boot Log Analyzer (assignment work):
 - Runs as a Python CLI with tests and CI, plus an in-browser version on GitHub Pages.
 
 Portfolio (his personal site):
-- Dark + lime interactive site: boot-up loader, mouse-parallax starfield, rotating wireframe torus knot hero, a featured project gallery and the live analysis workbenches.
+- Dark + lime interactive site: boot-up loader, mouse-parallax starfield, rotating wireframe torus knot hero, a featured project gallery and a 3D project carousel.
 - Tech: plain HTML/CSS/JS with Three.js and GSAP, no build step.
 
 This bot (Ask-Kanishk) itself:
@@ -105,7 +143,7 @@ const SYSTEM_PROMPT = `You are "Ask Kanishk", a chatbot on Kanishk Saini's perso
 
 Who Kanishk is:
 - Kanishk Saini, a first-year engineering student in Shirpur, India.
-- He builds web apps and research tools. Lately his focus is finance, stock markets and business analysis: tools that show their assumptions, label synthetic data and print their limits. Plain HTML, CSS and JavaScript. No frameworks, no sign-ups, no tracking. Everything saves to the browser's local storage, everything is free.
+- He builds web apps for everyday tasks, company research tools, and a 3D flying game while learning. Plain HTML, CSS and JavaScript. No frameworks, no sign-ups, no tracking. Everything saves to the browser's local storage, everything is free.
 - He is learning, not an expert, and he is open about that. Never oversell him. Honest framing: "he's learning X" not "he's an expert in X".
 - Currently learning: HTML, CSS, JavaScript, Flutter, C, and Git.
 - A pattern across his apps: no accounts, no backend, data stays on your device, math logic separated into its own tested file, real screenshots instead of mockups.
@@ -113,9 +151,6 @@ Who Kanishk is:
 Links: when you give a link, use ONLY these exact URLs, copied character-for-character: the portfolio https://kanishk-saini-007.github.io/portfolio/ and the project URLs listed below. NEVER invent, guess or reconstruct any other domain or URL. If a project has no URL in this prompt, name it without a link.
 His projects (all live, free, no accounts):
 ${PROJECTS.map(p => `- ${p.name}: ${p.what}. Live at ${p.url}`).join("\n")}
-
-The ten analysis workbenches, with their exact live URLs (quote these character-for-character when someone asks for a tool link):
-${TOOLS.map(t => `- ${t.name}: ${t.url}`).join("\n")}
 
 Detailed project knowledge (use this when someone asks how an app works, what it does in detail, what's inside, or what he learned building it):
 ${PROJECT_DEEP}
@@ -203,35 +238,29 @@ function nextSavage() {
 
 const OFFLINE = [
   { keys: ["built", "projects", "apps", "made", "work", "portfolio"], answer:
-    "His current live work, three to start with:\n" +
+    "His projects, three to start with:\n" +
     `• **${PROJECTS[0].name}** — ${PROJECTS[0].what}\n` +
-    `• **${PROJECTS[1].name}** — ${PROJECTS[1].what}\n` +
-    `• **${PROJECTS[2].name}** — ${PROJECTS[2].what}\n` +
+    `• **${PROJECTS[8].name}** — finance dashboard with real SEC data\n` +
+    `• **${PROJECTS[7].name}** — ${PROJECTS[7].what}\n` +
     `Full list with screenshots: ${LINKS.portfolio}` },
   { keys: ["learning", "study", "skills", "stack", "language"], answer:
     "Right now he's learning HTML, CSS, JavaScript, Flutter, C and Git — first year, so everything on this site is him learning by building. He keeps it honest: learning, not mastered." },
   { keys: ["attendx", "attendance", "bunk"], answer:
-    `AttendX was one of his early utility apps — it's retired now. His current focus is finance research tools: Company X-Ray, Corporate Intelligence Lab and ten live analysis workbenches. The full current list: ${LINKS.portfolio}` },
+    `AttendX is his flagship app — set your required attendance (any %), log classes per subject, and it tells you exactly how many you can still skip or must attend to recover, plus a weekly what-if simulator. Try it: ${PROJECTS[0].url}` },
   { keys: ["contact", "email", "reach", "linkedin", "message"], answer:
     `Easiest ways to reach him:\n• Email — ${LINKS.email}\n• LinkedIn — ${LINKS.linkedin}\n• GitHub — ${LINKS.github}` },
   { keys: ["who", "about", "kanishk"], answer:
-    "Kanishk Saini — first-year engineering student in Shirpur who builds web apps and finance research tools. Plain HTML/CSS/JS, no frameworks, no accounts. He started with an attendance calculator and kept going." },
+    "Kanishk Saini — first-year engineering student in Shirpur who builds web apps that fix everyday annoyances. Plain HTML/CSS/JS, no frameworks, no accounts. He started with an attendance calculator and kept going." },
   { keys: ["which", "first", "try", "best", "recommend", "start"], answer:
-    `Depends what you're curious about:\n• company research → Company X-Ray\n• ratio deep-dives → Corporate Intelligence Lab\n• live finance calculators → the analysis workbenches\n• flying around a 3D city → Stark Sky\n\nStart at his portfolio: ${LINKS.portfolio}` },
+    `Depends on your annoyance:\n• bunking classes → AttendX\n• deadlines → DueSoon\n• group bills → SplitSmart\n• focus → FocusFlow\n\nAttendX is the one most people start with: ${PROJECTS[0].url}` },
   { keys: ["github", "code", "repo", "source"], answer:
     `Everything is open on his GitHub: ${LINKS.github}` },
   { keys: ["hire", "internship", "job", "collab", "freelance"], answer:
     `He's a first-year student learning in public, but he's always up for interesting conversations. Best bet: ${LINKS.email} or LinkedIn — ${LINKS.linkedin}` },
   { keys: ["flutter", "mobile", "app dev"], answer:
-    "He just started with Flutter — built a glass-style profile screen for his App Dev Club while learning Dart." },
-  { keys: ["debt", "valuation", "earnings", "cohort", "concentration", "drawdown", "workbench", "workbenches", "tool", "tools"], answer:
-    `Live browser tools, exact URLs:\n` +
-    `• **Debt Maturity Stress** — ${TOOLS[1].url}\n` +
-    `• **Valuation Scenario Lab** — ${TOOLS[3].url}\n` +
-    `• **Earnings Quality Bridge** — ${TOOLS[0].url}\n` +
-    `• all ten workbenches: ${LINKS.portfolio}#analysis-tools` },
+    "He just started with Flutter — built a glass-style profile screen for his App Dev Club. It's on his GitHub if you want to see a beginner's honest first attempt." },
   { keys: ["finance", "corporate", "stock", "company"], answer:
-    `Finance is his main thing now:\n• Company X-Ray — ${PROJECTS[0].what}: ${PROJECTS[0].url}\n• Corporate Intelligence Lab — ${PROJECTS[1].what}: ${PROJECTS[1].url}\n• Ten analysis workbenches — live browser tools for earnings quality, valuation, debt stress, cohorts and more: ${PROJECTS[2].url}` },
+    `He has two finance projects:\n• Corporate Intelligence Lab — ${PROJECTS[8].what}: ${PROJECTS[8].url}\n• Company X-Ray — ${PROJECTS[9].what}: ${PROJECTS[9].url}` },
   { keys: ["abuse", "stupid", "idiot", "dumb bot", "trash", "sucks", "loser", "shut up", "bakwas", "faltu", "worst bot"], answerFn: () =>
     '"' + nextSavage() + '"' + "\n(the ai writes the real roasts, i'm the offline understudy. his apps, though, are still live and free: " + LINKS.portfolio + ")" },
   { keys: ["hi", "hello", "hey", "yo"], answer:
@@ -408,7 +437,7 @@ function offlineAnswer(q) {
 }
 
 /* only project/site URLs from this file may survive in bot answers; guessed domains are stripped */
-const ALLOWED_LINKS = [LINKS.portfolio, LINKS.github, LINKS.linkedin, ...PROJECTS.map(p => p.url), ...TOOLS.map(t => t.url)];
+const ALLOWED_LINKS = [LINKS.portfolio, LINKS.github, LINKS.linkedin, ...PROJECTS.map(p => p.url)];
 function scrubLinks(text) {
   const ok = (url) => ALLOWED_LINKS.some(a => url.startsWith(a) || a.startsWith(url));
   return text
