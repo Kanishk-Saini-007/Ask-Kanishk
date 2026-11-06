@@ -40,6 +40,21 @@ const PROJECTS = [
   { name: "Portfolio", url: "https://kanishk-saini-007.github.io/portfolio/", what: "his personal site — the dark + lime one everything links from" },
 ];
 
+/* the ten live analysis workbenches - exact URLs, the only ones the bot may quote for tools */
+const TOOL_BASE = "https://kanishk-saini-007.github.io/portfolio/tools/";
+const TOOLS = [
+  { name: "Earnings Quality Bridge", slug: "earnings-quality-bridge" },
+  { name: "Debt Maturity Stress", slug: "debt-maturity-stress" },
+  { name: "Capital Allocation Review", slug: "capital-allocation-review" },
+  { name: "Valuation Scenario Lab", slug: "valuation-scenario-lab" },
+  { name: "Peer Period Normalizer", slug: "peer-period-normalizer" },
+  { name: "Guidance Evidence Ledger", slug: "guidance-evidence-ledger" },
+  { name: "Startup Cohort Economics", slug: "startup-cohort-economics" },
+  { name: "Segment Mix Attribution", slug: "segment-mix-attribution" },
+  { name: "Market Concentration Lab", slug: "market-concentration-lab" },
+  { name: "Historical Portfolio Risk", slug: "historical-portfolio-risk" },
+].map(t => ({ ...t, url: TOOL_BASE + t.slug + "/" }));
+
 /* detailed per-project knowledge, condensed from the public repos' READMEs */
 const PROJECT_DEEP = `
 Company X-Ray (his flagship finance project):
@@ -98,6 +113,9 @@ Who Kanishk is:
 Links: when you give a link, use ONLY these exact URLs, copied character-for-character: the portfolio https://kanishk-saini-007.github.io/portfolio/ and the project URLs listed below. NEVER invent, guess or reconstruct any other domain or URL. If a project has no URL in this prompt, name it without a link.
 His projects (all live, free, no accounts):
 ${PROJECTS.map(p => `- ${p.name}: ${p.what}. Live at ${p.url}`).join("\n")}
+
+The ten analysis workbenches, with their exact live URLs (quote these character-for-character when someone asks for a tool link):
+${TOOLS.map(t => `- ${t.name}: ${t.url}`).join("\n")}
 
 Detailed project knowledge (use this when someone asks how an app works, what it does in detail, what's inside, or what he learned building it):
 ${PROJECT_DEEP}
@@ -206,6 +224,12 @@ const OFFLINE = [
     `He's a first-year student learning in public, but he's always up for interesting conversations. Best bet: ${LINKS.email} or LinkedIn — ${LINKS.linkedin}` },
   { keys: ["flutter", "mobile", "app dev"], answer:
     "He just started with Flutter — built a glass-style profile screen for his App Dev Club while learning Dart." },
+  { keys: ["debt", "valuation", "earnings", "cohort", "concentration", "drawdown", "workbench", "workbenches", "tool", "tools"], answer:
+    `Live browser tools, exact URLs:\n` +
+    `• **Debt Maturity Stress** — ${TOOLS[1].url}\n` +
+    `• **Valuation Scenario Lab** — ${TOOLS[3].url}\n` +
+    `• **Earnings Quality Bridge** — ${TOOLS[0].url}\n` +
+    `• all ten workbenches: ${LINKS.portfolio}#analysis-tools` },
   { keys: ["finance", "corporate", "stock", "company"], answer:
     `Finance is his main thing now:\n• Company X-Ray — ${PROJECTS[0].what}: ${PROJECTS[0].url}\n• Corporate Intelligence Lab — ${PROJECTS[1].what}: ${PROJECTS[1].url}\n• Ten analysis workbenches — live browser tools for earnings quality, valuation, debt stress, cohorts and more: ${PROJECTS[2].url}` },
   { keys: ["abuse", "stupid", "idiot", "dumb bot", "trash", "sucks", "loser", "shut up", "bakwas", "faltu", "worst bot"], answerFn: () =>
@@ -364,7 +388,7 @@ function setStatus(aiMode) {
     text.textContent = "online · gemini connected";
   } else {
     dot.classList.remove("on");
-    text.textContent = "offline mode · no api key yet";
+    text.textContent = "offline mode · local answers only";
   }
 }
 
@@ -372,17 +396,19 @@ function setStatus(aiMode) {
 
 function offlineAnswer(q) {
   const lower = q.toLowerCase();
+  // whole-word/phrase matching only: "hi" must not fire on "his", "yo" not on "your"
+  const hit = (k) => new RegExp("\\b" + k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(lower);
   let best = null, bestScore = 0;
   for (const entry of OFFLINE) {
     let score = 0;
-    for (const k of entry.keys) if (lower.includes(k)) score += k.length;
+    for (const k of entry.keys) if (hit(k)) score += k.length;
     if (score > bestScore) { bestScore = score; best = entry; }
   }
   return best ? (best.answerFn ? best.answerFn() : best.answer) : FALLBACK;
 }
 
 /* only project/site URLs from this file may survive in bot answers; guessed domains are stripped */
-const ALLOWED_LINKS = [LINKS.portfolio, LINKS.github, LINKS.linkedin, ...PROJECTS.map(p => p.url)];
+const ALLOWED_LINKS = [LINKS.portfolio, LINKS.github, LINKS.linkedin, ...PROJECTS.map(p => p.url), ...TOOLS.map(t => t.url)];
 function scrubLinks(text) {
   const ok = (url) => ALLOWED_LINKS.some(a => url.startsWith(a) || a.startsWith(url));
   return text
@@ -430,6 +456,16 @@ async function handleSend(q) {
   try {
     let answer;
     let usedAI = false;
+    if (PROXY_URL && !aiOnline) {
+      // one quick re-ping before giving up on the ai: a single failed call
+      // (or a slow minute) should not park the bot offline until reload
+      try {
+        const pr = await fetch(PROXY_URL, { method: "GET" });
+        const pd = pr.ok ? await pr.json() : { ok: false };
+        aiOnline = !!pd.ok;
+        setStatus(aiOnline);
+      } catch { /* stay offline this round */ }
+    }
     if (PROXY_URL && aiOnline) {
       try {
         answer = await geminiAnswer(q);
