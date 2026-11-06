@@ -95,6 +95,7 @@ Who Kanishk is:
 - Currently learning: HTML, CSS, JavaScript, Flutter, C, and Git.
 - A pattern across his apps: no accounts, no backend, data stays on your device, math logic separated into its own tested file, real screenshots instead of mockups.
 
+Links: when you give a link, use ONLY these exact URLs, copied character-for-character: the portfolio https://kanishk-saini-007.github.io/portfolio/ and the project URLs listed below. NEVER invent, guess or reconstruct any other domain or URL. If a project has no URL in this prompt, name it without a link.
 His projects (all live, free, no accounts):
 ${PROJECTS.map(p => `- ${p.name}: ${p.what}. Live at ${p.url}`).join("\n")}
 
@@ -380,6 +381,15 @@ function offlineAnswer(q) {
   return best ? (best.answerFn ? best.answerFn() : best.answer) : FALLBACK;
 }
 
+/* only project/site URLs from this file may survive in bot answers; guessed domains are stripped */
+const ALLOWED_LINKS = [LINKS.portfolio, LINKS.github, LINKS.linkedin, ...PROJECTS.map(p => p.url)];
+function scrubLinks(text) {
+  const ok = (url) => ALLOWED_LINKS.some(a => url.startsWith(a) || a.startsWith(url));
+  return text
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, (m, label, url) => ok(url) ? m : label)
+    .replace(/(?<!\()\bhttps?:\/\/[^\s)]+/g, (url) => ok(url) ? url : LINKS.portfolio);
+}
+
 /* ---------- ai mode ---------- */
 
 async function geminiAnswer(q) {
@@ -404,6 +414,7 @@ async function geminiAnswer(q) {
   const data = await res.json();
   const text = (data.reply || "").trim();
   if (!text) throw new Error("proxy: empty reply");
+  text = scrubLinks(text);
   history.push({ role: "user", parts: [{ text: q }] });
   history.push({ role: "model", parts: [{ text }] });
   while (history.length > HISTORY_MAX) history.shift();
