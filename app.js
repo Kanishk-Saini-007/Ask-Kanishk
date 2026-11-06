@@ -412,7 +412,7 @@ async function geminiAnswer(q) {
   }
   if (!res.ok) throw new Error(`proxy: HTTP ${res.status}`);
   const data = await res.json();
-  const text = (data.reply || "").trim();
+  let text = (data.reply || "").trim();
   if (!text) throw new Error("proxy: empty reply");
   text = scrubLinks(text);
   history.push({ role: "user", parts: [{ text: q }] });
