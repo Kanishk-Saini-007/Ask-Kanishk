@@ -383,15 +383,23 @@ function offlineAnswer(q) {
 /* ---------- ai mode ---------- */
 
 async function geminiAnswer(q) {
-  const res = await fetch(PROXY_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      message: q,
-      history: history.slice(-HISTORY_MAX),
-      system: SYSTEM_PROMPT,
-    }),
-  });
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 45000); // never leave the bot hung on a stuck request
+  let res;
+  try {
+    res = await fetch(PROXY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: q,
+        history: history.slice(-HISTORY_MAX),
+        system: SYSTEM_PROMPT,
+      }),
+      signal: ctrl.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
   if (!res.ok) throw new Error(`proxy: HTTP ${res.status}`);
   const data = await res.json();
   const text = (data.reply || "").trim();
