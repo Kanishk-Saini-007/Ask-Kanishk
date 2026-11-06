@@ -399,7 +399,7 @@ async function geminiAnswer(q) {
   try {
     res = await fetch(PROXY_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "text/plain" }, // simple request: the application/json preflight stalls from some browsers
       body: JSON.stringify({
         message: q,
         history: history.slice(-HISTORY_MAX),
