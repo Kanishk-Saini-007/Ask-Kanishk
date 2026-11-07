@@ -27,7 +27,7 @@ const PROXY_URL = "https://ask-kanishk-proxy.vercel.app/api/chat"; // "" = offli
 const LINKS = {
   github: "https://github.com/Kanishk-Saini-007",
   linkedin: "https://www.linkedin.com/in/itskanishksaini",
-  portfolio: "https://kanishk-saini-007.github.io/portfolio/",
+  portfolio: "https://kanishk-saini-007.github.io/Portfolio/",
   email: "its.kanishk.saini@gmail.com",
 };
 
@@ -41,13 +41,13 @@ const PROJECTS = [
   { name: "HabitGrid", url: "https://kanishk-saini-007.github.io/HabitGrid/", what: "habit tracker with a GitHub-style year grid" },
   { name: "DueSoon", url: "https://kanishk-saini-007.github.io/DueSoon/", what: "deadline tracker with live countdowns and a 'next up' card" },
   { name: "Corporate Intelligence Lab", url: "https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/", what: "financial-analysis dashboard — 11 real companies, 5 years of SEC data, 21 ratios, risk scores, a what-if lab" },
-  { name: "Company X-Ray", url: "https://kanishk-saini-007.github.io/company-xray/", what: "pick a big listed company, get its live share price, segments ranked weakest to strongest, and an auto-generated acquisition pitch" },
-  { name: "Portfolio", url: "https://kanishk-saini-007.github.io/portfolio/", what: "his personal site — the 3D-ish dark + lime one everything links from" },  { name: "Stark Sky", url: "https://kanishk-saini-007.github.io/stark-sky/", what: "Ironman-inspired 3D flying game and project city" },
+  { name: "Company X-Ray", url: "https://kanishk-saini-007.github.io/Company-Xray/", what: "pick a big listed company, get its live share price, segments ranked weakest to strongest, and an auto-generated acquisition pitch" },
+  { name: "Portfolio", url: "https://kanishk-saini-007.github.io/Portfolio/", what: "his personal site — the 3D-ish dark + lime one everything links from" },  { name: "Stark Sky", url: "https://kanishk-saini-007.github.io/Stark-Sky/", what: "Ironman-inspired 3D flying game and project city" },
   { name: "CGPA Calc", url: "https://kanishk-saini-007.github.io/CGPA-Calc/", what: "results calculator for NMIMS MPSTME Shirpur per the SRB A.Y. 2026-27" },
   { name: "NextClass", url: "https://kanishk-saini-007.github.io/NextClass/", what: "weekly timetable with now and next class countdown" },
   { name: "SpendLeft", url: "https://kanishk-saini-007.github.io/SpendLeft/", what: "monthly allowance and daily spending tracker" },
   { name: "FlashFormula", url: "https://kanishk-saini-007.github.io/FlashFormula/", what: "formula flashcards with shuffle, progress and custom cards" },
-  { name: "Android Boot Log Analyzer", url: "https://kanishk-saini-007.github.io/android-boot-log-analyzer/", what: "analyze and compare Android boot logs in the browser" },
+  { name: "Android Boot Log Analyzer", url: "https://kanishk-saini-007.github.io/Android-Boot-Log-Analyzer/", what: "analyze and compare Android boot logs in the browser" },
 ];
 
 /* detailed per-project knowledge, condensed from the public repos' READMEs */
@@ -148,7 +148,7 @@ Who Kanishk is:
 - Currently learning: HTML, CSS, JavaScript, Flutter, C, and Git.
 - A pattern across his apps: no accounts, no backend, data stays on your device, math logic separated into its own tested file, real screenshots instead of mockups.
 
-Links: when you give a link, use ONLY these exact URLs, copied character-for-character: the portfolio https://kanishk-saini-007.github.io/portfolio/ and the project URLs listed below. NEVER invent, guess or reconstruct any other domain or URL. If a project has no URL in this prompt, name it without a link.
+Links: when you give a link, use ONLY these exact URLs, copied character-for-character: the portfolio https://kanishk-saini-007.github.io/Portfolio/ and the project URLs listed below. NEVER invent, guess or reconstruct any other domain or URL. If a project has no URL in this prompt, name it without a link.
 His projects (all live, free, no accounts):
 ${PROJECTS.map(p => `- ${p.name}: ${p.what}. Live at ${p.url}`).join("\n")}
 
