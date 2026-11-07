@@ -43,7 +43,7 @@ const PROJECTS = [
   { name: "Corporate Intelligence Lab", url: "https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/", what: "financial-analysis dashboard — 11 real companies, 5 years of SEC data, 21 ratios, risk scores, a what-if lab" },
   { name: "Company X-Ray", url: "https://kanishk-saini-007.github.io/company-xray/", what: "pick a big listed company, get its live share price, segments ranked weakest to strongest, and an auto-generated acquisition pitch" },
   { name: "Portfolio", url: "https://kanishk-saini-007.github.io/portfolio/", what: "his personal site — the 3D-ish dark + lime one everything links from" },  { name: "Stark Sky", url: "https://kanishk-saini-007.github.io/stark-sky/", what: "Ironman-inspired 3D flying game and project city" },
-  { name: "CGPA Planner", url: "https://kanishk-saini-007.github.io/CGPAPlanner/", what: "semester SGPA and CGPA planning with target mode" },
+  { name: "CGPA Calc", url: "https://kanishk-saini-007.github.io/CGPA-Calc/", what: "results calculator for NMIMS MPSTME Shirpur per the SRB A.Y. 2026-27" },
   { name: "NextClass", url: "https://kanishk-saini-007.github.io/NextClass/", what: "weekly timetable with now and next class countdown" },
   { name: "SpendLeft", url: "https://kanishk-saini-007.github.io/SpendLeft/", what: "monthly allowance and daily spending tracker" },
   { name: "FlashFormula", url: "https://kanishk-saini-007.github.io/FlashFormula/", what: "formula flashcards with shuffle, progress and custom cards" },
