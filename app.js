@@ -1,4 +1,5 @@
-/* v1.5 - smarter model, chat memory, real detailed answers, deeper project knowledge
+/* v1.5.2 - offline mode: wider insult detection, roasts beat topic keywords
+   v1.5 - smarter model, chat memory, real detailed answers, deeper project knowledge
    v1.4 - his own savage bank + answers general questions too
    v1.3 - tighter roast bans (no family/background mentions, any direction)
    v1.2 - aura update: witty roasts, safe limits
@@ -261,7 +262,7 @@ const OFFLINE = [
     "He just started with Flutter — built a glass-style profile screen for his App Dev Club. It's on his GitHub if you want to see a beginner's honest first attempt." },
   { keys: ["finance", "corporate", "stock", "company"], answer:
     `He has two finance projects:\n• Corporate Intelligence Lab — ${PROJECTS[8].what}: ${PROJECTS[8].url}\n• Company X-Ray — ${PROJECTS[9].what}: ${PROJECTS[9].url}` },
-  { keys: ["abuse", "stupid", "idiot", "dumb bot", "trash", "sucks", "loser", "shut up", "bakwas", "faltu", "worst bot"], answerFn: () =>
+  { keys: ["abuse", "stupid", "idiot", "dumb bot", "trash", "sucks", "suck", "loser", "shut up", "bakwas", "faltu", "worst bot", "fuck", "fucking", "fck", "mf", "stfu", "shit", "bullshit", "bitch", "asshole", "useless", "pathetic", "garbage", "lame", "bc", "mc", "bsdk", "chutiya"], answerFn: () =>
     '"' + nextSavage() + '"' + "\n(the ai writes the real roasts, i'm the offline understudy. his apps, though, are still live and free: " + LINKS.portfolio + ")" },
   { keys: ["hi", "hello", "hey", "yo"], answer:
     "hey! ask me anything about kanishk — what he's built, what he's learning, how to reach him. or troll me and see what happens." },
@@ -427,13 +428,18 @@ function offlineAnswer(q) {
   const lower = q.toLowerCase();
   // whole-word/phrase matching only: "hi" must not fire on "his", "yo" not on "your"
   const hit = (k) => new RegExp("\\b" + k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(lower);
+  // insults win over topic keywords: "fuck him and his projects" is a troll
+  // naming a topic, not a project question - the roast always goes first
+  const roast = OFFLINE.find((e) => e.answerFn);
+  if (roast && roast.keys.some(hit)) return roast.answerFn();
   let best = null, bestScore = 0;
   for (const entry of OFFLINE) {
+    if (entry === roast) continue;
     let score = 0;
     for (const k of entry.keys) if (hit(k)) score += k.length;
     if (score > bestScore) { bestScore = score; best = entry; }
   }
-  return best ? (best.answerFn ? best.answerFn() : best.answer) : FALLBACK;
+  return best ? best.answer : FALLBACK;
 }
 
 /* only project/site URLs from this file may survive in bot answers; guessed domains are stripped */
